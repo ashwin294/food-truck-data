@@ -1,5 +1,6 @@
 package org.assignment.impl;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,6 +20,7 @@ import java.io.InputStream;
  */
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
 public class ApiTruckDataFetcher implements TruckDataFetcher {
@@ -28,8 +30,6 @@ public class ApiTruckDataFetcher implements TruckDataFetcher {
 
 	@Override
 	public InputStream getTruckData() {
-//		String jsonUrl = System.getProperty(Constants.RuntimeProperty.JSON_URL);
-//		String url = StringUtils.isBlank(jsonUrl) ? Constants.Api.DEFAULT_JSON_URL : jsonUrl;
 		RestClient restClient = RestClient.builder().url(this.url).requestType(RequestType.GET).build();
 		try {
 			return restClient.makeRequest();

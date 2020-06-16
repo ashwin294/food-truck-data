@@ -6,6 +6,9 @@ import lombok.experimental.SuperBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Pojo to hold relevant truck data.
+ */
 @Getter
 @Setter
 @AllArgsConstructor

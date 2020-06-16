@@ -19,7 +19,7 @@ public class Constants {
 		public static final String JSON_URL = "https://data.sfgov.org/resource/jjew-r69b.json";
 		public static final String HEADERS = "NAME,ADDRESS";
 		public static final int ITEMS_PER_PAGE = 10;
-		public static final int TABLE_WIDTH = 150 ;
+		public static final int TABLE_WIDTH = 150;
 
 	}
 

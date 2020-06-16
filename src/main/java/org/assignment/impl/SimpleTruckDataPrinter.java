@@ -1,5 +1,9 @@
 package org.assignment.impl;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 import net.je2sh.asciitable.JTable;
 import org.apache.commons.lang3.StringUtils;
 import org.assignment.entities.Constants;
@@ -10,23 +14,25 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@SuperBuilder
 public class SimpleTruckDataPrinter implements TruckDataPrinter {
 	private static final Logger log = LoggerFactory.getLogger(SimpleTruckDataPrinter.class);
-	private static int itemsPerPage; //TODO: should this be here
 
 	private static String headerOne;
 	private static String headerTwo;
 	private static int tableWidth;
 
 	static {
-		String property = System.getProperty(Constants.RuntimeProperty.ITEMS_PER_PAGE);
-		itemsPerPage = StringUtils.isBlank(property) ? Constants.Defaults.ITEMS_PER_PAGE : Integer.parseInt(property);
+
 		String[] tokens = Constants.Defaults.HEADERS.split(",");
 		headerOne = tokens[0];
 		headerTwo = tokens[1];
 
 		// Attempt to read table width from vm arg.
-		property = System.getProperty(Constants.RuntimeProperty.TABLE_WIDTH);
+		String property = System.getProperty(Constants.RuntimeProperty.TABLE_WIDTH);
 		tableWidth = StringUtils.isBlank(property) ? Constants.Defaults.TABLE_WIDTH : Integer.parseInt(property);
 	}
 
