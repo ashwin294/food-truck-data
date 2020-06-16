@@ -18,15 +18,15 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Client util to make Rest API calls.
+ * Simple client util to make Rest API calls.
  */
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
-public class RestClientUtil {
-	private static final Logger log = LoggerFactory.getLogger(RestClientUtil.class);
+public class RestClient {
+	private static final Logger log = LoggerFactory.getLogger(RestClient.class);
 
 	private String url;
 	private RequestType requestType;
@@ -46,7 +46,8 @@ public class RestClientUtil {
 			connection.setRequestMethod(this.requestType.toString());
 			return connection.getInputStream();
 		} catch (IOException e) {
-			log.error("Could not connect to the given URL[{}]", this.url, e);
+			log.error("Could not connect to the given URL[{}]", this.url);
+			log.debug("Could not connect to the given URL[{}]", this.url, e);
 			throw new APIRequestException("Communication failure with URL: " + this.url);
 		}
 	}

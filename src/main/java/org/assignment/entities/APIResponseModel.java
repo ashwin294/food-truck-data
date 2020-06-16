@@ -12,7 +12,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @ToString
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class APIResponse implements Comparable<APIResponse> {
+public class APIResponseModel implements Comparable<APIResponseModel> {
 
 	@JsonProperty("dayorder")
 	public String dayorder;
@@ -40,7 +40,7 @@ public class APIResponse implements Comparable<APIResponse> {
 	public String applicant;
 
 	@Override
-	public int compareTo(APIResponse that) {
+	public int compareTo(APIResponseModel that) {
 		if (that == null) return -1;
 		return this.applicant.compareTo(that.applicant);
 	}

@@ -3,12 +3,15 @@ package org.assignment.runner;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.assignment.entities.APIResponse;
+import org.assignment.entities.APIResponseModel;
+import org.assignment.entities.ShortTruckInfo;
+import org.assignment.impl.SimpleTruckDataPrinter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TestRunner {
@@ -24,8 +27,15 @@ public class TestRunner {
 			URL url = new URL("https://data.sfgov.org/resource/jjew-r69b.json");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
-			List<APIResponse> apiResponse = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false).readValue(conn.getInputStream(), new TypeReference<List<APIResponse>>() {
+			List<APIResponseModel> apiResponseModelList = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false).readValue(conn.getInputStream(), new TypeReference<List<APIResponseModel>>() {
 			});
+
+			List<ShortTruckInfo> shortTruckInfoList = new ArrayList<>();
+			apiResponseModelList.forEach(apiResponseModel -> {
+				shortTruckInfoList.add(ShortTruckInfo.builder().applicant(apiResponseModel.getApplicant()).location(apiResponseModel.getLocation()).build());
+			});
+
+			new SimpleTruckDataPrinter().print(shortTruckInfoList);
 
 //			BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 //			String line;
@@ -34,7 +44,7 @@ public class TestRunner {
 //			}
 //			rd.close();
 
-			log.info("Response: {}", apiResponse);
+//			log.info("Response: {}", apiResponseModelList);
 		} catch (Exception e) {
 			log.error(e.getMessage());
 		}

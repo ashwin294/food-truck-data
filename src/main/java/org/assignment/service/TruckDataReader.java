@@ -1,6 +1,6 @@
 package org.assignment.service;
 
-import org.assignment.entities.APIResponse;
+import org.assignment.entities.APIResponseModel;
 
 import java.io.InputStream;
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Interface to parse Food Truck Data.
  */
-public interface FoodTruckDataReader {
+public interface TruckDataReader {
 
 	/**
 	 * Read from source and generate a list of APIResponse objects.
@@ -16,6 +16,6 @@ public interface FoodTruckDataReader {
 	 * @param inputStream InputStream to the source data.
 	 * @return A list of APIResponse objects read from the InputStream, empty list in case of failures or if no data present.
 	 */
-	List<APIResponse> readData(InputStream inputStream);
+	List<APIResponseModel> readData(InputStream inputStream);
 
 }
