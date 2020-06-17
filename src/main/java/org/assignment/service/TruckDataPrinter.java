@@ -1,9 +1,12 @@
 package org.assignment.service;
 
-import org.assignment.entities.ShortTruckInfo;
+import org.assignment.entities.TruckInfo;
 
 import java.util.List;
 
+/**
+ * Prints Truck data in a suitable format.
+ */
 public interface TruckDataPrinter {
 
 	/**
@@ -11,6 +14,6 @@ public interface TruckDataPrinter {
 	 *
 	 * @param truckInfoList The ShortTruckInfo list.
 	 */
-	void print(List<ShortTruckInfo> truckInfoList);
+	void print(List<TruckInfo> truckInfoList);
 
 }

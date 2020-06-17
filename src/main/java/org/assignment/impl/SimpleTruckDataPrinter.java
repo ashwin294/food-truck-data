@@ -7,7 +7,7 @@ import lombok.experimental.SuperBuilder;
 import net.je2sh.asciitable.JTable;
 import org.apache.commons.lang3.StringUtils;
 import org.assignment.entities.Constants;
-import org.assignment.entities.ShortTruckInfo;
+import org.assignment.entities.TruckInfo;
 import org.assignment.service.TruckDataPrinter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,7 +41,7 @@ public class SimpleTruckDataPrinter implements TruckDataPrinter {
 
 	// @formatter:off
 	@Override
-	public void print(List<ShortTruckInfo> truckInfoList) {
+	public void print(List<TruckInfo> truckInfoList) {
 
 		JTable jTable = JTable.of().width(tableWidth)			// https://jeeshell.github.io/asciitable/
 									.row()

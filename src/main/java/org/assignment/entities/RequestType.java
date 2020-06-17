@@ -1,5 +1,8 @@
 package org.assignment.entities;
 
+/**
+ * Type of API requests.
+ */
 public enum RequestType {
 
 	POST("POST"), GET("GET");

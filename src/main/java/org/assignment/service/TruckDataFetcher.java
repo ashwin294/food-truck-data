@@ -2,6 +2,9 @@ package org.assignment.service;
 
 import java.io.InputStream;
 
+/**
+ * Gets raw data from a Truck Data Source.
+ */
 public interface TruckDataFetcher {
 
 	/**

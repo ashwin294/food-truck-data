@@ -1,6 +1,6 @@
 package org.assignment.tests;
 
-import org.assignment.entities.APIResponseModel;
+import org.assignment.entities.TruckInfo;
 import org.assignment.impl.JsonTruckDataReader;
 import org.junit.Assert;
 import org.junit.Test;
@@ -16,9 +16,9 @@ public class DataReaderTest {
 	@Test
 	public void testDataReader() {
 		InputStream testData = PrinterTest.class.getClassLoader().getResourceAsStream("test_data.json");
-		List<APIResponseModel> apiResponseModels = new JsonTruckDataReader().readData(testData);
-		log.info("Response has {} truck details.", apiResponseModels.size());
-		Assert.assertTrue(apiResponseModels != null && !apiResponseModels.isEmpty());
+		List<TruckInfo> truckInfoList = new JsonTruckDataReader().readData(testData);
+		log.info("Response has {} truck details.", truckInfoList.size());
+		Assert.assertTrue(truckInfoList != null && !truckInfoList.isEmpty());
 	}
 
 }

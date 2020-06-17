@@ -12,7 +12,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @ToString
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class APIResponseModel implements Comparable<APIResponseModel> {
+public class ExtendedTruckInfo extends TruckInfo {
 
 	@JsonProperty("dayorder")
 	public String dayorder;
@@ -24,8 +24,6 @@ public class APIResponseModel implements Comparable<APIResponseModel> {
 	public String endtime;
 	@JsonProperty("permit")
 	public String permit;
-	@JsonProperty("location")
-	public String location;
 	@JsonProperty("locationdesc")
 	public String locationdesc;
 	@JsonProperty("optionaltext")
@@ -36,12 +34,5 @@ public class APIResponseModel implements Comparable<APIResponseModel> {
 	public String start24;
 	@JsonProperty("end24")
 	public String end24;
-	@JsonProperty("applicant")
-	public String applicant;
 
-	@Override
-	public int compareTo(APIResponseModel that) {
-		if (that == null) return -1;
-		return this.applicant.compareTo(that.applicant);
-	}
 }

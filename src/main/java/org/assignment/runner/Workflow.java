@@ -2,8 +2,7 @@ package org.assignment.runner;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import org.assignment.entities.APIResponseModel;
-import org.assignment.entities.ShortTruckInfo;
+import org.assignment.entities.TruckInfo;
 import org.assignment.service.TruckDataFetcher;
 import org.assignment.service.TruckDataPrinter;
 import org.assignment.service.TruckDataReader;
@@ -12,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -44,26 +44,28 @@ public class Workflow {
 		InputStream truckDataStream = truckDataFetcher.getTruckData();
 
 		// Parse data from the raw input.
-		List<APIResponseModel> apiResponseModelList = truckDataReader.readData(truckDataStream);
+		List<TruckInfo> truckInfoList = truckDataReader.readData(truckDataStream);
 
-		List<ShortTruckInfo> shortTruckInfoList = new ArrayList<>();
+		Collections.sort(truckInfoList);
+
+		List<TruckInfo> truckInfoToPrint = new ArrayList<>();
 
 		// Begin paginating truck details..
 		int count = 0;
-		for (APIResponseModel apiResponseModel : apiResponseModelList) {
-			shortTruckInfoList.add(ShortTruckInfo.builder().location(apiResponseModel.getLocation()).applicant(apiResponseModel.getApplicant()).build());
+		for (TruckInfo truckInfo : truckInfoList) {
+			truckInfoToPrint.add(truckInfo);
 			count++;
 			if (count % maxItemsToPrint == 0) {
-				log.info("Displaying truck details {} - {} of {}. Press [Enter] key to display next set of items..", count - maxItemsToPrint + 1, count, apiResponseModelList.size());
-				truckDataPrinter.print(shortTruckInfoList);
+				log.info("Displaying truck details {} - {} of {}. Press [Enter] key to display next set of items..", count - maxItemsToPrint + 1, count, truckInfoList.size());
+				truckDataPrinter.print(truckInfoToPrint);
 				waitForUserInput();
-				shortTruckInfoList.clear();
+				truckInfoToPrint.clear();
 			}
 		}
 
-		if (!shortTruckInfoList.isEmpty()) {
-			log.info("Displaying truck details {} - {} of {}.", count - shortTruckInfoList.size() + 1, count, apiResponseModelList.size());
-			truckDataPrinter.print(shortTruckInfoList);
+		if (!truckInfoToPrint.isEmpty()) {
+			log.info("Displaying truck details {} - {} of {}.", count - truckInfoToPrint.size() + 1, count, truckInfoList.size());
+			truckDataPrinter.print(truckInfoToPrint);
 		}
 
 		log.info("No more truck details left to display. Exiting workflow.\n");

@@ -7,13 +7,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import org.assignment.entities.APIResponseModel;
+import org.assignment.entities.ExtendedTruckInfo;
+import org.assignment.entities.TruckInfo;
 import org.assignment.service.TruckDataReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -28,14 +30,15 @@ public class JsonTruckDataReader implements TruckDataReader {
 	private static final Logger log = LoggerFactory.getLogger(JsonTruckDataReader.class);
 
 	@Override
-	public List<APIResponseModel> readData(InputStream inputStream) {
+	public List<TruckInfo> readData(InputStream inputStream) {
 		if (inputStream == null) {
 			log.error("Invalid input stream provided to DataReader.");
 			return Collections.emptyList();
 		}
 		try {
-			return new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false).readValue(inputStream, new TypeReference<List<APIResponseModel>>() {
+			List<ExtendedTruckInfo> extendedTruckInfos = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false).readValue(inputStream, new TypeReference<List<ExtendedTruckInfo>>() {
 			});
+			return new ArrayList<>(extendedTruckInfos);
 		} catch (IOException e) {
 			log.error("Could not read data from the InputStream due to " + e.getMessage());
 			log.debug("Could not read data from the InputStream.", e);
@@ -47,9 +50,9 @@ public class JsonTruckDataReader implements TruckDataReader {
 	 * Convenience method to use String object.
 	 *
 	 * @param inputString String containing the JSON data.
-	 * @return List of APIResponse objects.
+	 * @return List of TruckInfo objects.
 	 */
-	public List<APIResponseModel> readData(String inputString) {
+	public List<TruckInfo> readData(String inputString) {
 		return readData(new ByteArrayInputStream(inputString.getBytes(StandardCharsets.UTF_8)));
 	}
 
@@ -57,10 +60,10 @@ public class JsonTruckDataReader implements TruckDataReader {
 	 * Convenience method to use File object.
 	 *
 	 * @param inputFile File containing the JSON data.
-	 * @return List of APIResponse objects.
+	 * @return List of TruckInfo objects.
 	 * @throws FileNotFoundException
 	 */
-	public List<APIResponseModel> readData(File inputFile) throws FileNotFoundException {
+	public List<TruckInfo> readData(File inputFile) throws FileNotFoundException {
 		return readData(new FileInputStream(inputFile));
 	}
 }

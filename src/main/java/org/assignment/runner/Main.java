@@ -31,6 +31,7 @@ public class Main {
 
 		url = url + "?" + requestParamString;
 
+		// Inject Fetcher, Reader & Printer implementations and run the workflow.
 		Workflow.builder().maxItemsToPrint(itemsPerPage)
 				.truckDataFetcher(ApiTruckDataFetcher.builder().url(url).build())
 				.truckDataReader(JsonTruckDataReader.builder().build())
