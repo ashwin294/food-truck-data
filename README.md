@@ -25,7 +25,7 @@ java -cp target/*:target/lib/* org.assignment.runner.Main
     ITEMS_PER_PAGE <number> : Set the # of items to be displayed per page.
     JSON_URL <String> : Set the URL to GET the truck details from.
     
-## Example:
+## Example
 
 ```bash
 bash-3.2$ java -DTABLE_WIDTH=100 -DITEMS_PER_PAGE=12 -cp target/*:target/lib/* org.assignment.runner.Main
