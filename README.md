@@ -28,5 +28,5 @@ java -cp target/*:target/lib/* org.assignment.runner.Main
 ## Example
 
 ```bash
-bash-3.2$ java -DTABLE_WIDTH=100 -DITEMS_PER_PAGE=12 -cp target/*:target/lib/* org.assignment.runner.Main
+java -DTABLE_WIDTH=100 -DITEMS_PER_PAGE=12 -cp target/*:target/lib/* org.assignment.runner.Main
 ```
