@@ -15,6 +15,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * The core user workflow.
+ * 1. Gets raw truck data from datasource using TruckDataFetcher.
+ * 2. Converts raw truck data to object format using TruckDataReader.
+ * 3. Prints formatted & paginated data using TruckDataPrinter while waiting for user to press [Enter] key before moving to next page.
+ */
 @Getter
 @Setter
 @AllArgsConstructor
@@ -29,6 +35,9 @@ public class Workflow {
 	private TruckDataPrinter truckDataPrinter;
 	private int maxItemsToPrint;
 
+	/**
+	 * Starts the workflow.
+	 */
 	public void start() {
 
 		// Get Truck data from datasource.
@@ -53,14 +62,17 @@ public class Workflow {
 		}
 
 		if (!shortTruckInfoList.isEmpty()) {
-			log.info("Displaying truck details {} - {} of {}. Press [Enter] key to display next set of items..", count - shortTruckInfoList.size(), count, apiResponseModelList.size());
+			log.info("Displaying truck details {} - {} of {}.", count - shortTruckInfoList.size() + 1, count, apiResponseModelList.size());
 			truckDataPrinter.print(shortTruckInfoList);
 		}
 
-		log.info("No more truck details left to display.");
+		log.info("No more truck details left to display. Exiting workflow.\n");
 
 	}
 
+	/**
+	 * Waits for user to press [Enter] key.
+	 */
 	private void waitForUserInput() {
 		new Scanner(System.in).nextLine();
 	}

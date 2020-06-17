@@ -39,14 +39,24 @@ public class GenericUtils {
 
 	}
 
+	/**
+	 * @return The current hour in 24 hour format - {15:00}
+	 */
 	public static String getCurrentHourString() {
 		return new DateTime().getHourOfDay() + ":00";
 	}
 
+	/**
+	 * @param dateTime The DateTime
+	 * @return If its AM or PM from the given DateTime.
+	 */
 	public static boolean isAM(DateTime dateTime) {
 		return dateTime.getHourOfDay() < 12;
 	}
 
+	/**
+	 * @return Returns the Day of the Week with the first char in uppercase and the rest in lowercase .
+	 */
 	public static String getCurrentDay() {
 		return StringUtils.capitalize(DayOfWeek.of(new DateTime().getDayOfWeek()).toString().toLowerCase());
 	}

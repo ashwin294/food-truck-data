@@ -53,7 +53,7 @@ public class RestClient {
 	}
 
 	private void validate() throws InvalidDataException {
-		if (StringUtils.isBlank(this.url) || requestType == null) {
+		if (StringUtils.isBlank(this .url) || requestType == null) {
 			log.error("Invalid URL[{}] or RequestType[{}].", this.url, this.requestType);
 			throw new InvalidDataException("Invalid URL or RequestType.");
 		}

@@ -34,7 +34,7 @@ public class SimpleTruckDataPrinter implements TruckDataPrinter {
 		headerOne = tokens[0];
 		headerTwo = tokens[1];
 
-		// Attempt to read table width from vm arg.
+		// Attempt to read table width from jvm arg.
 		String property = System.getProperty(Constants.RuntimeProperty.TABLE_WIDTH);
 		tableWidth = StringUtils.isBlank(property) ? Constants.Defaults.TABLE_WIDTH : Integer.parseInt(property);
 	}
