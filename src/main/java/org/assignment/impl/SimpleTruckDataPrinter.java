@@ -14,6 +14,9 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
+/**
+ * Prints given list of Truck details to System.out
+ */
 @Getter
 @Setter
 @NoArgsConstructor
