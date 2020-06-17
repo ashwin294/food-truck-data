@@ -29,6 +29,10 @@ public class JsonTruckDataReader implements TruckDataReader {
 
 	@Override
 	public List<APIResponseModel> readData(InputStream inputStream) {
+		if (inputStream == null) {
+			log.error("Invalid input stream provided to DataReader.");
+			return Collections.emptyList();
+		}
 		try {
 			return new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false).readValue(inputStream, new TypeReference<List<APIResponseModel>>() {
 			});
